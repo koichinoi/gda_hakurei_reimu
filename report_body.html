@@ -1,0 +1,43 @@
+<main class="report">
+  <header class="hero">
+    {% include 'inline_assets.html' %}
+    <div class="hero-wash"></div>
+    <div class="masthead"><span class="shrine-mark" aria-hidden="true">⛩</span> 博丽神社 <span class="masthead-en">HAKUREI SHRINE</span></div>
+    <div class="hero-copy">
+      <div class="eyebrow">幻想乡观察手帖 · DAILY REPORT</div>
+      <h1>今日份的<br><em>幻想乡</em></h1>
+      <div class="hero-subtitle">群聊日记 <span>／</span> 人间烟火，尽收结界</div>
+      <div class="date">{{ current_date }} <span class="date-dot">◆</span> 日常记录</div>
+    </div>
+    <div class="seal" aria-hidden="true">博丽<br>记事</div>
+    <div class="hero-bottom"><span>巫女的日常观察簿</span><span>HAKUREI REIMU</span></div>
+  </header>
+  <div class="content">
+    <section class="overview" aria-label="今日群聊统计">
+      <div class="overview-label"><span>今日香火簿</span><small>THE DAY IN NUMBERS</small></div>
+      <div class="stats">
+        <div class="stat"><span>消息总数</span><strong>{{ message_count | default(0, true) }}</strong><small>条消息落入结界</small></div>
+        <div class="stat"><span>参与群友</span><strong>{{ participant_count | default(0, true) }}</strong><small>位访客相聚神社</small></div>
+        <div class="stat"><span>总字符数</span><strong>{{ total_characters | default(0, true) }}</strong><small>字记录今日见闻</small></div>
+        <div class="stat"><span>表情数量</span><strong>{{ emoji_count | default(0, true) }}</strong><small>份心情生动传达</small></div>
+      </div>
+      {% if most_active_period %}<div class="peak"><span class="peak-dot"></span> 最热闹的时刻 <strong>{{ most_active_period }}</strong><span class="peak-note">神社今日，人气正好。</span></div>{% endif %}
+    </section>
+    {% if hourly_chart_html | default('') | trim %}
+    <section class="section activity-section">
+      <div class="section-head"><span class="section-symbol">时</span><div><h2>结界内的二十四时</h2><small>群聊活跃轨迹 · ACTIVITY</small></div><span class="head-rule"></span></div>
+      <div class="chart-card">{{ hourly_chart_html | safe }}</div>
+    </section>
+    {% endif %}
+    {% if topics_html | default('') | trim %}{{ topics_html | safe }}{% endif %}
+    {% if titles_html | default('') | trim %}{{ titles_html | safe }}{% endif %}
+    {% if quotes_html | default('') | trim %}{{ quotes_html | safe }}{% endif %}
+    {% if chat_quality_html | default('') | trim %}
+    <section class="section quality-section">
+      <div class="section-head"><span class="section-symbol">签</span><div><h2>今日群聊御签</h2><small>群聊质量观察 · DAILY REVIEW</small></div><span class="head-rule"></span></div>
+      {{ chat_quality_html | safe }}
+    </section>
+    {% endif %}
+    <footer><div class="footer-ribbon"><span></span><b>◆</b><span></span></div><p>今日的热闹，已好好收进神社的记事簿。</p><div class="footer-meta"><span>博丽神社 · 群聊日记</span><span>{{ current_datetime | default(current_date, true) }}</span></div><div class="credits">AstrBot 群聊日常分析 · 博丽灵梦主题</div></footer>
+  </div>
+</main>

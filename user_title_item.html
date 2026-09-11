@@ -1,0 +1,11 @@
+{% if titles %}
+<section class="section titles-section">
+<div class="section-head"><span class="section-symbol">客</span><div><h2>今日神社来客</h2><small>群友称号与画像 · VISITORS</small></div><span class="head-rule"></span></div>
+<div class="members-grid">{% for item in titles %}
+<article class="member-card">
+<div class="member-head">{% if item.avatar_data %}<img class="avatar" src="{{ item.avatar_data }}" alt="群友头像">{% else %}<span class="avatar avatar-fallback" aria-hidden="true">缘</span>{% endif %}<div class="member-info"><div class="member-name">{% if not hide_user_names | default(false) and item.name %}{{ item.name }}{% else %}神社来客 {{ loop.index }}{% endif %}</div>{% if item.profile_display or item.mbti %}<span class="profile-badge">{{ item.profile_display or item.mbti }}</span>{% endif %}</div></div>
+<h3 class="member-title">{{ item.title }}</h3><div class="member-reason">{{ item.reason }}</div>
+{% if item.profile_image %}<img class="profile-image" src="{{ item.profile_image }}" alt="">{% endif %}
+</article>{% endfor %}</div>
+</section>
+{% endif %}

@@ -1,0 +1,6 @@
+{% if chart_data %}
+<div class="chart-legend"><span>消息数量 / 小时</span><span>朱红标记峰值时段</span></div>
+<div class="chart-grid" role="img" aria-label="24 小时群聊消息分布">
+{% for item in chart_data %}{% set pct = [100, [0, item.percentage | float] | max] | min %}<div class="chart-col{% if pct >= 99.9 and item.count > 0 %} is-peak{% endif %}" title="{{ '%02d' | format(item.hour) }}:00 · {{ item.count }} 条"><div class="chart-track"><div class="chart-bar" style="height:{{ pct }}%"></div></div><div class="chart-hour">{{ '%02d' | format(item.hour) }}</div><div class="chart-count">{{ item.count }}</div></div>{% endfor %}
+</div>
+{% endif %}

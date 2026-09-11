@@ -1,0 +1,6 @@
+{% if quotes %}
+<section class="section quotes-section">
+<div class="section-head"><span class="section-symbol">言</span><div><h2>奉纳箱里的金句</h2><small>精彩发言与锐评 · QUOTES</small></div><span class="head-rule"></span></div>
+{% for item in quotes %}<article class="quote-card"><div class="quote-header">{% if item.avatar_url %}<img class="avatar" src="{{ item.avatar_url }}" alt="发言者头像">{% else %}<span class="avatar avatar-fallback" aria-hidden="true">言</span>{% endif %}<span>{% if not hide_user_names | default(false) and item.sender %}{{ item.sender }}{% else %}神社来客 {{ loop.index }}{% endif %}</span><span class="quote-tag">今日奉纳</span></div><blockquote class="quote-text">{{ item.content }}</blockquote>{% if item.reason %}<div class="critique"><span class="critique-label">旁听手记</span>{{ item.reason | safe }}</div>{% endif %}</article>{% endfor %}
+</section>
+{% endif %}

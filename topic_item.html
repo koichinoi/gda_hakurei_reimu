@@ -1,0 +1,8 @@
+{% if topics %}
+<section class="section topics-section">
+<div class="section-head"><span class="section-symbol">闻</span><div><h2>神社见闻录</h2><small>今日热门话题 · TOPICS</small></div><span class="head-rule"></span></div>
+{% for item in topics %}
+<article class="topic-card"><div class="topic-number">{{ '%02d' | format(item.index) }}</div><div><h3>{{ item.topic.topic }}</h3><div class="topic-detail">{{ item.detail | safe }}</div>{% if item.contributors %}<div class="contributors"><span class="contributors-label">参与讨论</span>{{ item.contributors }}</div>{% endif %}</div></article>
+{% endfor %}
+</section>
+{% endif %}

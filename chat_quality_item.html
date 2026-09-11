@@ -1,0 +1,8 @@
+{% if title or summary or dimensions %}
+<div class="quality-card">
+{% if title %}<h3 class="quality-title">{{ title }}</h3>{% endif %}
+{% if subtitle %}<p class="quality-subtitle">{{ subtitle }}</p>{% endif %}
+{% if dimensions %}<div class="quality-dimensions">{% for dim in dimensions %}{% if dim.percentage | float > 0 %}{% set pct = [100, [0, dim.percentage | float] | max] | min %}<div class="dimension"><div class="dimension-head"><span>{{ dim.name }}</span><strong>{{ dim.percentage }}%</strong></div><div class="dimension-track"><div class="dimension-fill" style="width:{{ pct }}%"></div></div><p>{{ dim.comment }}</p></div>{% endif %}{% endfor %}</div>{% endif %}
+{% if summary %}<p class="quality-summary"><b>御签解读 · </b>{{ summary }}</p>{% endif %}
+</div>
+{% endif %}
