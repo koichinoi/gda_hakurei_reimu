@@ -38,15 +38,26 @@
       {{ chat_quality_html | safe }}
     </section>
     {% endif %}
-    <footer><div class="footer-ribbon"><span></span><b>◆</b><span></span></div><p>今日的热闹，已好好收进神社的记事簿。</p><div class="footer-meta"><span>博丽神社 · 群聊日记</span><span>{{ current_datetime | default(current_date, true) }}</span></div><div class="token-usage" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:4px 16px;margin:14px 0 4px;font-size:14px;line-height:1.8;color:var(--muted);font-variant-numeric:tabular-nums" aria-label="本次结界灵力用量">
-      {% if total_tokens is defined and total_tokens is not none %}
-      <span>本次结界消耗 <strong style="color:var(--red);font-weight:600">{{ '{:,}'.format(total_tokens | int) }}</strong> 灵力</span>
-      {% if prompt_tokens is defined and prompt_tokens is not none and completion_tokens is defined and completion_tokens is not none %}
-      <span style="font-size:12px">注入 {{ '{:,}'.format(prompt_tokens | int) }} · 释出 {{ '{:,}'.format(completion_tokens | int) }}</span>
-      {% endif %}
-      {% else %}
-      <span>本次结界灵力用量未提供</span>
-      {% endif %}
-    </div><div class="credits">AstrBot 群聊日常分析 · 博丽灵梦主题</div></footer>
+    <section class="spirit-settlement" aria-labelledby="spirit-settlement-title" style="margin-top:36px;padding-top:26px;border-top:1px solid var(--line);break-inside:avoid">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap">
+        <span aria-hidden="true" style="display:grid;place-items:center;width:42px;height:42px;border:1px solid #dac7a8;border-radius:10px;background:#f3eadd;color:var(--red);font-family:SimSun,serif;font-size:24px">灵</span>
+        <div style="flex:1;min-width:0">
+          <h2 id="spirit-settlement-title" style="font-size:24px;line-height:1.5;color:var(--deep)">今日灵力结算</h2>
+          <div style="font-size:12px;line-height:1.7;color:var(--muted)">记录本次神社记事的灵力消耗</div>
+        </div>
+        <span style="padding:4px 12px;border:1px solid var(--line);border-radius:20px;background:#f3ecdf;color:var(--gold);font-size:10px;letter-spacing:2px;white-space:nowrap">结界收支</span>
+      </div>
+      <dl class="spirit-cards" style="display:flex;flex-wrap:wrap;gap:14px;margin:0;padding:0">
+        {% for label, amount in [('总灵力消耗', total_tokens | default(none)), ('注入灵力', prompt_tokens | default(none)), ('释出灵力', completion_tokens | default(none))] %}
+        <div class="spirit-card" style="flex:1 1 180px;min-width:0;padding:18px 16px;text-align:center;background:#f5eee2;border:1px solid #dfceb2;border-radius:12px">
+          <dt style="font-size:13px;line-height:1.7;color:var(--muted);letter-spacing:1px">{{ label }}</dt>
+          <dd style="margin:4px 0 0;font-size:30px;line-height:1.4;font-weight:700;color:var(--red);font-variant-numeric:tabular-nums;overflow-wrap:anywhere">
+            {% if amount is not none %}{{ '{:,}'.format(amount | int) }}{% else %}<span style="font-size:16px;font-weight:400;color:var(--muted)">未提供</span>{% endif %}
+          </dd>
+        </div>
+        {% endfor %}
+      </dl>
+    </section>
+    <footer><div class="footer-ribbon"><span></span><b>◆</b><span></span></div><p>今日的热闹，已好好收进神社的记事簿。</p><div class="footer-meta"><span>博丽神社 · 群聊日记</span><span>{{ current_datetime | default(current_date, true) }}</span></div><div class="credits">AstrBot 群聊日常分析 · 博丽灵梦主题</div></footer>
   </div>
 </main>
