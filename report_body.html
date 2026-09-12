@@ -38,14 +38,14 @@
       {{ chat_quality_html | safe }}
     </section>
     {% endif %}
-    <footer><div class="footer-ribbon"><span></span><b>◆</b><span></span></div><p>今日的热闹，已好好收进神社的记事簿。</p><div class="footer-meta"><span>博丽神社 · 群聊日记</span><span>{{ current_datetime | default(current_date, true) }}</span></div><div class="token-usage" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:4px 16px;margin:14px 0 4px;font-size:14px;line-height:1.8;color:var(--muted);font-variant-numeric:tabular-nums" aria-label="本次分析 Token 用量">
+    <footer><div class="footer-ribbon"><span></span><b>◆</b><span></span></div><p>今日的热闹，已好好收进神社的记事簿。</p><div class="footer-meta"><span>博丽神社 · 群聊日记</span><span>{{ current_datetime | default(current_date, true) }}</span></div><div class="token-usage" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:4px 16px;margin:14px 0 4px;font-size:14px;line-height:1.8;color:var(--muted);font-variant-numeric:tabular-nums" aria-label="本次结界灵力用量">
       {% if total_tokens is defined and total_tokens is not none %}
-      <span>本次分析消耗 <strong style="color:var(--red);font-weight:600">{{ '{:,}'.format(total_tokens | int) }}</strong> Tokens</span>
+      <span>本次结界消耗 <strong style="color:var(--red);font-weight:600">{{ '{:,}'.format(total_tokens | int) }}</strong> 灵力</span>
       {% if prompt_tokens is defined and prompt_tokens is not none and completion_tokens is defined and completion_tokens is not none %}
-      <span style="font-size:12px">输入 {{ '{:,}'.format(prompt_tokens | int) }} · 输出 {{ '{:,}'.format(completion_tokens | int) }}</span>
+      <span style="font-size:12px">注入 {{ '{:,}'.format(prompt_tokens | int) }} · 释出 {{ '{:,}'.format(completion_tokens | int) }}</span>
       {% endif %}
       {% else %}
-      <span>本次分析 Token 用量未提供</span>
+      <span>本次结界灵力用量未提供</span>
       {% endif %}
     </div><div class="credits">AstrBot 群聊日常分析 · 博丽灵梦主题</div></footer>
   </div>
