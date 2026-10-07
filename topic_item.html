@@ -1,8 +1,1 @@
-{% if topics %}
-<section class="section topics-section">
-<div class="section-head"><span class="section-symbol">闻</span><div><h2>神社见闻录</h2><small>今日热门话题 · TOPICS</small></div><span class="head-rule"></span></div>
-{% for item in topics %}
-<article class="topic-card"><div class="topic-number">{{ '%02d' | format(item.index) }}</div><div><h3>{{ item.topic.topic }}</h3><div class="topic-detail">{{ item.detail | safe }}</div>{% if item.contributors %}<div class="contributors"><span class="contributors-label">参与讨论</span>{{ item.contributors }}</div>{% endif %}</div></article>
-{% endfor %}
-</section>
-{% endif %}
+{% from 'inline_assets.html' import sticker, stickers, wink, think, pray %}{% if topics %}<section class="section topics-section"><div class="section-head"><div class="section-title"><span class="section-symbol">♧</span><div><h2>高光记忆碎片</h2><small>灵梦已经把今天最有趣的见闻记下来了！</small></div><img class="heading-sticker" src="{{ wink }}" alt=""></div><span class="section-tag">TOPIC BOARD</span></div>{% for item in topics %}<article class="topic-card"><div class="topic-head"><span class="topic-number">{{ '%02d' | format(loop.index) }}</span><h3>{{ item.topic.topic }}</h3></div>{% if item.contributors %}<p class="contributors"><b>✦ 参与群友：</b>{{ item.contributors }}</p>{% endif %}<div class="topic-detail">{{ item.detail }}</div><img class="sticker" src="{{ stickers[loop.index0 % (stickers|length)] }}" alt=""></article>{% endfor %}</section>{% endif %}

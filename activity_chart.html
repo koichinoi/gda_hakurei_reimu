@@ -1,6 +1,1 @@
-{% if chart_data %}
-<div class="chart-legend"><span>消息数量 / 小时</span><span>朱红标记峰值时段</span></div>
-<div class="chart-grid" role="img" aria-label="24 小时群聊消息分布">
-{% for item in chart_data %}{% set pct = [100, [0, item.percentage | float] | max] | min %}<div class="chart-col{% if pct >= 99.9 and item.count > 0 %} is-peak{% endif %}" title="{{ '%02d' | format(item.hour) }}:00 · {{ item.count }} 条"><div class="chart-track"><div class="chart-bar" style="height:{{ pct }}%"></div></div><div class="chart-hour">{{ '%02d' | format(item.hour) }}</div><div class="chart-count">{{ item.count }}</div></div>{% endfor %}
-</div>
-{% endif %}
+{% from 'inline_assets.html' import sticker, stickers, wink, think, pray %}{% if chart_data %}<section class="section activity-section"><div class="section-head"><div class="section-title"><span class="section-symbol">▥</span><div><h2>二十四时的结界</h2><small>一整天的热闹，都藏在这些小小的刻度里</small></div><img class="heading-sticker" src="{{ think }}" alt=""></div><span class="section-tag">LOG CHART</span></div><div class="chart-card"><div class="chart-grid">{% for item in chart_data %}{% set pct = [100,[0,item.percentage|default(0)|float]|max]|min %}<div class="chart-column"><div class="chart-bar" style="height:{{ pct }}%">{% if item.count %}<span class="bar-count">{{ item.count }}</span>{% endif %}</div></div>{% endfor %}</div><div class="chart-hours">{% for item in chart_data %}<span>{{ item.hour }}</span>{% endfor %}</div><p class="chart-caption">每小时消息数 · 相对最高峰显示</p></div></section>{% endif %}
